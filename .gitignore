@@ -1,0 +1,44 @@
+# Python / FastAPI
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.coverage
+htmlcov/
+
+# SQLite database files
+*.db
+*.sqlite3
+
+# Env files
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs
+*.log
+logs/
+uvicorn.log
+
+# Compiled files
+*.so
+*.dll
+
+# Build / Distribution
+build/
+dist/
+
+# VSCode / PyCharm / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Docker / Cache
+__pycache__/
+.cache/
