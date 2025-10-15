@@ -5,6 +5,8 @@ pydantic==2.9.2
 python-dotenv==1.0.1
 aiomysql==0.2.0
 Pillow==10.4.0
+# FastAPI UploadFile/File requires python-multipart at runtime
+python-multipart>=0.0.9
 # NOTE: pyzbar requires system library libzbar and often fails in Azure Oryx build.
 # If server-side image scanning is required, use a custom container or install libzbar.
 # pyzbar==0.1.9
