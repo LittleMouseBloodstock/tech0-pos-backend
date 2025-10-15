@@ -29,6 +29,16 @@ app.include_router(purchase.router, prefix="/api")
 app.include_router(scan.router, prefix="/api")
 
 
+@app.get("/")
+def root_index() -> dict:
+    return {
+        "message": "Backend is running.",
+        "api_health": "/api/health",
+        "api_root": "/api",
+        "name": settings.app_name,
+        "version": "0.1.0",
+    }
+
 @app.get("/api")
 def root() -> dict:
     return {"name": settings.app_name, "version": "0.1.0"}
