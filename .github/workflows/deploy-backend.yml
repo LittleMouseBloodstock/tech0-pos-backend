@@ -13,30 +13,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Upload backend contents as artifact
+      - name: Upload backend as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: python-app
-          path: .
+          name: backend
+          path: backend
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Download artifact from build job to workspace root
+      - name: Download backend artifact to workspace root
         uses: actions/download-artifact@v4
         with:
-          name: python-app
+          name: backend
           path: .
 
-      - name: Deploy to Azure Web App (package = workspace root)
+      - name: Deploy to Azure Web App (package = ./backend)
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'app-002-gen10-step3-1-py-oshima51'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EFC7B518BA6342A88C606F91CA3D1490 }}
-          package: '.'
+          package: './backend'
           # If you want to enforce startup via workflow instead of Procfile, uncomment below:
           # startup-command: 'gunicorn -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:${PORT} app.main:app'
 
