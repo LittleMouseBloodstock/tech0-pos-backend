@@ -36,7 +36,7 @@ jobs:
         with:
           app-name: 'app-002-gen10-step3-1-py-oshima51'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EFC7B518BA6342A88C606F91CA3D1490 }}
-          package: './'
+          package: ./tech0-pos-backend
           # If you want to enforce startup via workflow instead of Procfile, uncomment below:
           # startup-command: 'gunicorn -k uvicorn.workers.UvicornWorker -w 2 -b 0.0.0.0:${PORT} app.main:app'
 
