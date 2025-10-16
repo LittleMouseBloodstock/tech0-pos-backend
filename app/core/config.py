@@ -23,6 +23,10 @@ class Settings(BaseModel):
     allowed_origins: List[str] = Field(
         default_factory=lambda: _split_csv(os.getenv("ALLOWED_ORIGINS", "http://localhost:3000"))
     )
+    # Optional: allow origins by regex (e.g., 
+    #   ^https://app-.*-node-.*\.azurewebsites\.net$
+    # Useful on Azure when exact hostnames vary by slot)
+    allowed_origin_regex: str | None = Field(default=os.getenv("ALLOWED_ORIGIN_REGEX"))
     # Database URL (optional at this stage)
     database_url: str | None = Field(default=os.getenv("DATABASE_URL"))
 
@@ -35,4 +39,3 @@ def get_settings() -> Settings:
     if _SETTINGS_CACHE is None:
         _SETTINGS_CACHE = Settings()
     return _SETTINGS_CACHE
-

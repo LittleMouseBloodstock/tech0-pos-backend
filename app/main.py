@@ -18,10 +18,25 @@ app = FastAPI(title=settings.app_name, version="0.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.allowed_origins,
+    allow_origin_regex=settings.allowed_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Simple startup log to help diagnose CORS configuration in Azure logs
+@app.on_event("startup")
+def _log_cors_settings() -> None:  # pragma: no cover
+    try:
+        import logging
+
+        logging.getLogger("uvicorn.error").info(
+            "CORS allow_origins=%s allow_origin_regex=%s",
+            settings.allowed_origins,
+            settings.allowed_origin_regex,
+        )
+    except Exception:
+        pass
 
 app.include_router(health.router, prefix="/api")
 app.include_router(products.router, prefix="/api")
